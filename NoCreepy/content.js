@@ -91,92 +91,70 @@
   // ==========================================
   // PART 2: MESSAGE CENSORING (With Regex Support & Counter)
   // ==========================================
-function censorAll() {
+  function censorAll() {
+    // 🛑 FIXED: The globalEnable switch is now active!
     if (!config.globalEnable || !config.filterMessages || config.badWords.length === 0) return;
 
     let rawRegexes = [];
     let plainWords = [];
 
-    // 1. Sort and Prepare patterns
     for (let w of config.badWords) {
       w = w.trim();
-      if (!w) continue;
       
       if (w.startsWith('(?i)')) {
-        let pattern = w.slice(4);
-        // CRITICAL FIX: Strip ^ and $ anchors. 
-        // These work for single strings, but break inside a combined (A|B|C) regex.
-        pattern = pattern.replace(/^\^/, '').replace(/\$$/, '');
-        rawRegexes.push(pattern);
+        rawRegexes.push(w.slice(4));
       } 
       else if (w.startsWith('/') && w.lastIndexOf('/') > 0) {
         const lastSlash = w.lastIndexOf('/');
-        let pattern = w.substring(1, lastSlash);
-        pattern = pattern.replace(/^\^/, '').replace(/\$$/, '');
-        rawRegexes.push(pattern);
+        rawRegexes.push(w.substring(1, lastSlash));
       } 
       else {
-        // Normal words: we keep them safe with escaping
         plainWords.push(w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
       }
     }
 
     let combinedParts = [];
     
-    // Add normal words with word boundaries
     if (plainWords.length > 0) {
       combinedParts.push(`\\b(${plainWords.join('|')})\\b`);
     }
     
-    // Add raw regexes (wrapped in non-capturing groups)
     if (rawRegexes.length > 0) {
-      // Use (?: ) to ensure the OR | operator only applies to that specific pattern
       combinedParts.push(rawRegexes.map(r => `(?:${r})`).join('|'));
     }
 
     if (combinedParts.length === 0) return;
 
-    // 2. Build the master engine
-    // We use 'gi' - Global (all matches) and Ignore Case (matches your list perfectly)
     const targetWord = new RegExp(combinedParts.join('|'), 'gi');
-
-    // 3. Scan Discord Messages
     const messages = document.querySelectorAll('[id^="message-content-"]');
     let newCensorsCount = 0;
 
     for (const contentNode of messages) {
       if (contentNode.dataset.isCensored === 'true') continue;
 
-      // We test against the textContent first for speed, then replace HTML
-      if (targetWord.test(contentNode.textContent)) {
+      if (targetWord.test(contentNode.innerHTML)) {
         
         const msgId = contentNode.id;
         if (!countedMessageIds.has(msgId)) {
-          const matches = contentNode.textContent.match(targetWord);
+          const matches = contentNode.innerHTML.match(targetWord);
           if (matches) {
             newCensorsCount += matches.length; 
             countedMessageIds.add(msgId);
           }
         }
 
-        // Save original for the Kill-Switch
-        if (!contentNode.dataset.originalHtml) {
-          contentNode.dataset.originalHtml = contentNode.innerHTML;
-        }
-
-        // Apply Censorship to the HTML to preserve emojis/formatting
         contentNode.innerHTML = contentNode.innerHTML.replace(
           targetWord,
-          `<span style="background-color: #1e1f22; color: #80848e; padding: 0 4px; border-radius: 3px; cursor: help;" title="Safety Filter Applied">****</span>`
+          `<span style="background-color: #1e1f22; color: #80848e; padding: 0 4px; border-radius: 3px; cursor: help;" title="This message contains flagged words/patterns.">****</span>`
         );
         contentNode.dataset.isCensored = 'true';
       }
     }
 
-    // 4. Update Stats
     if (newCensorsCount > 0) {
       chrome.storage.local.get(["censoredCount"], (data) => {
-        chrome.storage.local.set({ censoredCount: (data.censoredCount || 0) + newCensorsCount });
+        let currentCount = data.censoredCount || 0;
+        chrome.storage.local.set({ censoredCount: currentCount + newCensorsCount });
       });
     }
   }
