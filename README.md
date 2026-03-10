@@ -1,3 +1,9 @@
+# This project has been archived.
+
+This project has been archived because this project was not submitted in time and was a failure.
+
+But the concept behind it can still be used in the real world and has potential to actually project childrens.
+
 # NoCreepy — Discord Safety Extension 🛡️
 
 <img width="305" height="436" alt="image" src="https://github.com/user-attachments/assets/fd5c9c67-b18a-4335-b314-f3bb34197758" />
