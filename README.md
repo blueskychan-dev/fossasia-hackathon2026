@@ -1,5 +1,8 @@
 # NoCreepy — Discord Safety Extension 🛡️
 
+<img width="305" height="436" alt="image" src="https://github.com/user-attachments/assets/fd5c9c67-b18a-4335-b314-f3bb34197758" />
+
+
 **NoCreepy** is a privacy and child-safety Chrome Extension designed specifically for Discord Web (`discord.com`). It acts as a shield against inappropriate content, predatory behavior, and malicious servers by modifying the user interface strictly on the client side.
 
 Built for the **FOSSASIA 2026 Hackathon**, NoCreepy operates 100% locally and supports Pi-hole style remote subscriptions for community-driven safety lists.
