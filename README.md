@@ -2,83 +2,61 @@
 
 **NoCreepy** is a privacy and child-safety Chrome Extension designed specifically for Discord Web (`discord.com`). It acts as a shield against inappropriate content, predatory behavior, and malicious servers by modifying the user interface strictly on the client side.
 
-Built with performance and privacy in mind, NoCreepy operates 100% locally and supports Pi-hole style remote subscriptions for community-driven safety lists.
+Built for the **FOSSASIA 2026 Hackathon**, NoCreepy operates 100% locally and supports Pi-hole style remote subscriptions for community-driven safety lists.
 
 ---
 
 ## ✨ Features
 
-* 🛑 **Server Blocker:** Prevents users from viewing flagged Discord servers. If a user clicks into a blacklisted server, a native-looking Discord modal instantly overlays the screen and safely redirects them back to their Direct Messages.
+* 🛑 **Server Blocker:** Prevents users from viewing flagged Discord servers. If a user clicks into a blacklisted server, a native-looking Discord modal instantly overlays the screen.
 * 💬 **Live Chat Censor:** Dynamically scans React-rendered chat messages and replaces blacklisted words with a `****` tooltip block. 
-* 🧠 **Advanced Regex Engine:** Supports plain text blocking or advanced Regular Expressions (e.g., `(?i)f+[\W_]*u[\W_]*c[\W_]*k+`) to catch attempts to bypass filters.
-* 📋 **Pi-hole Style Subscriptions:** Users can paste a raw `.txt` URL (like a GitHub Gist) into the settings. The extension will automatically download and compile the community blocklists, allowing for effortless updates.
-* 🕵️ **Snoop Detection:** Actively monitors `fetch`, `XMLHttpRequest`, `navigator.sendBeacon`, and `document.referrer` to warn you in the console if a webpage is trying to snoop on your active Discord channel URLs.
-* ⚡ **Global Kill-Switch:** Instantly toggle the extension on or off from the extension popup.
-
----
-
-## 🔒 Privacy First
-
-We believe safety shouldn't cost you your privacy.
-* **No Telemetry:** We do not collect, track, or send your data anywhere. 
-* **100% Local:** All manual inputs, remote lists, and statistics are stored locally on your machine using Chrome's `IndexedDB` (`chrome.storage.local`).
-* **ToS Compliant:** The extension does not use "self-botting" or manipulate Discord's API. It relies purely on frontend DOM observation (`MutationObserver`).
-
-Read our full [Security Policy](SECURITY.md) for more details.
+* 🧠 **Advanced Regex Engine:** Supports plain text blocking or advanced Regular Expressions (e.g., `(?i)f+[\W_]*u[\W_]*c[\W_]*k+`).
+* 📋 **Pi-hole Style Subscriptions:** Automatically syncs with remote `.txt` safety lists.
+* 🕵️ **Snoop Detection:** Monitors network requests to warn you if a webpage is trying to snoop on your Discord channel URLs.
+* ⚡ **Global Kill-Switch:** Instantly toggle the extension on or off.
 
 ---
 
 ## 🚀 Installation (Developer Mode)
 
-Currently, NoCreepy is available as an unpacked extension.
+Currently, NoCreepy is available as an unpacked extension. Follow these steps for a successful first-time setup:
 
-1. Download or clone this repository to your local machine.
-2. Open Google Chrome and navigate to `chrome://extensions/`.
-3. Enable **Developer mode** using the toggle in the top right corner.
-4. Click the **Load unpacked** button in the top left.
-5. Select the folder containing the NoCreepy files (`manifest.json`, `content.js`, etc.).
-6. Open or refresh a tab with `https://discord.com/app` to start the engine!
-
----
-
-## ⚙️ Usage
-
-### The Dashboard (Popup)
-Click the 🛡️ icon in your Chrome toolbar to open the quick dashboard. Here you can:
-* Toggle the Master Kill-Switch (instantly refreshes the page to apply/remove filters).
-* View live statistics of how many words have been censored.
-* See your active filter modes.
-
-### Full Settings (Options Page)
-Click the **⚙️ Open Full Settings** button in the popup to access the main dashboard.
-* **Manual Blocklists:** Add specific words, Regex patterns, or 18-digit Discord Server IDs manually.
-* **Remote Subscriptions:** Paste a link to a raw `.txt` file to subscribe to community-maintained blocklists. Click "Resync All" to fetch the latest updates from all your subscriptions.
+1. **Download:** Download or clone this repository to your local machine and extract the files.
+2. **Extensions Page:** Open Google Chrome and navigate to `chrome://extensions/`.
+3. **Developer Mode:** Enable **Developer mode** using the toggle in the top right corner.
+4. **Load Unpacked:** Click the **Load unpacked** button and select the **`NoCreepy` folder** (the one containing `manifest.json`).
+5. **⏱️ The 15-Second Sync:** Upon installation, the extension will automatically begin syncing the **Default Safety Lists** from GitHub:
+   * `default_server.txt` (Server ID Blocks)
+   * `default_words.txt` (Profanity/Regex Filters)
+   **Please wait at least 15 seconds** for the background process to finish downloading and compiling these lists.
+6. **🔄 The Initialization Toggle:** Click the 🛡️ NoCreepy icon in your browser toolbar. **Toggle the master switch OFF and then back ON**. This ensures the database is fully initialized for your first session.
+7. **Refresh Discord:** Go to your Discord tab and press **F5**. You are now protected!
 
 ---
 
-## 📝 For List Maintainers (Remote Subscriptions)
+## 🔒 Privacy & ToS
 
-Want to host a blocklist for others to use? Create a raw text file (e.g., a GitHub Gist) using the following format:
-
-```text
-Name="My Awesome Blocklist"
-Description="Blocks dangerous servers and bad words"
-blocks_type="server_id" # Use "server_id" for servers, or "text" for chat words
-Author="YourName"
-
-# Your content starts here (Comments start with #)
-990191444318900245
-
-```
-
-For more details on writing advanced Regex filters or setting up Server ID blocks, please read our [Developer Documentation](https://github.com/blueskychan-dev/fossasia-hackathon2026/blob/main/CONTRIBUTING.md).
+* **100% Local:** All data is stored in `chrome.storage.local` (IndexedDB) on your computer. We do not send any info to our servers or 3rd parties.
+* **ToS Compliant:** We do not modify Discord's API or replay requests. All actions are performed on the frontend via DOM manipulation.
 
 ---
 
-## 🛠️ Built With
+## ⚙️ Settings & Customization
 
-* JavaScript (ES6+)
-* Chrome Extension API (Manifest V3)
-* CSS3 / HTML5 (Native Discord UI Mimicry)
+### Manual Blocklists
+Add your own custom words or 18-digit Discord Server IDs in the **Full Settings** dashboard.
+
+### Remote Subscriptions
+NoCreepy comes pre-loaded with the following default lists:
+* [Default Server Blocks](https://raw.githubusercontent.com/blueskychan-dev/fossasia-hackathon2026/refs/heads/main/Filter_JSON/default_server.txt)
+* [Default Word Filters](https://raw.githubusercontent.com/blueskychan-dev/fossasia-hackathon2026/refs/heads/main/Filter_JSON/default_words.txt)
+
+You can add your own remote `.txt` URLs in the settings to create your own community safety net.
+
+---
+
+## 🚨 Security Reports
+Report any security problems or vulnerabilities via our GitHub Issues:
+[https://github.com/blueskychan-dev/fossasia-hackathon2026/issues](https://github.com/blueskychan-dev/fossasia-hackathon2026/issues)
 
 *Created for the FOSSASIA 2026 Hackathon.*
