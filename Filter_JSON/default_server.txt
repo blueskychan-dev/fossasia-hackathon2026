@@ -1,0 +1,7 @@
+Name="Default Blocks List Server" #title of the block list like most_thailand_creepy_messages
+Description="Under experiment" #Description of the block list
+blocks_type="server_id" # between text or server_id
+Author="blueskychan-dev"
+
+# Your content here.
+990191444318900245

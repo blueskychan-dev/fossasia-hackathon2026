@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NoCreepy Settings</title>
+  <style>
+    /* Font configuration */
+    @font-face {
+        font-family: "Stack Sans Headline";
+        src: url("fonts/StackSansHeadline.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    /* theme variables, dark and light */
+    :root {
+        color-scheme: light dark;
+        --bg: #e7f9ff;
+        --fg: #1a5265;
+        --muted: #1a526580;
+        --accent: #2898bd;
+        --card-bg: #ffffff;
+        --border: #c6edfb;
+        --top-bg: #c6edfb;
+        --danger: #ff5555;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg: #18181b;
+            --fg: #e4e4e7;
+            --muted: #71717a;
+            --accent: #a78bfa;
+            --card-bg: #27272a;
+            --border: #3f3f46;
+            --top-bg: #27272a;
+            --danger: #ef4444;
+        }
+    }
+
+    /* layout reset and changing the font globally */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Stack Sans Headline", monospace, sans-serif !important;
+    }
+
+    body {
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--fg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Top Header bar */
+    .top {
+        width: 100%;
+        height: 60px;
+        background: var(--top-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .top p {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    /* Main Container */
+    .container {
+        max-width: 900px;
+        width: 100%;
+        padding: 0 20px 40px;
+    }
+
+    /* Cards */
+    .card {
+        background: var(--card-bg);
+        padding: 24px;
+        border-radius: 12px;
+        border: 2px solid var(--border);
+        margin-bottom: 24px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    /* Stats */
+    .stats-card { text-align: center; }
+    .stats-number { font-size: 48px; font-weight: bold; color: var(--accent); }
+    .stats-label { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+
+    /* Toggles */
+    .toggles { display: flex; gap: 24px; }
+    .toggle-card { flex: 1; display: flex; justify-content: space-between; align-items: center; }
+    .toggle-card strong { font-size: 18px; display: block; margin-bottom: 4px; }
+    .toggle-card span { font-size: 12px; color: var(--muted); }
+    input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; accent-color: var(--accent); }
+
+    /* Grids */
+    .lists-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    h2 { margin-bottom: 16px; font-size: 20px; border-bottom: 2px solid var(--border); padding-bottom: 8px; }
+    
+    /* Inputs & Buttons */
+    .input-group { display: flex; gap: 8px; margin-bottom: 16px; }
+    input[type="text"] {
+        flex: 1;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 2px solid var(--border);
+        background: var(--bg);
+        color: var(--fg);
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+    input[type="text"]:focus { border-color: var(--accent); }
+    
+    button {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.1s, filter 0.2s;
+    }
+    button:hover { filter: brightness(1.1); }
+    button:active { transform: scale(0.95); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    
+    .btn-secondary { background: var(--bg); color: var(--fg); border: 2px solid var(--border); }
+    .btn-danger { background: var(--danger); padding: 6px 12px; font-size: 12px; }
+
+    /* Lists */
+    ul { list-style: none; max-height: 250px; overflow-y: auto; padding-right: 5px; }
+    ul::-webkit-scrollbar { width: 6px; }
+    ul::-webkit-scrollbar-thumb { background-color: var(--border); border-radius: 10px; }
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    /* Remote Subscriptions UI */
+    .remote-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .remote-header h2 { border: none; margin: 0; padding: 0; }
+    .remote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .remote-item { background: var(--bg); border: 2px solid var(--border); padding: 16px; border-radius: 8px; }
+    .remote-item-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .remote-item-title { font-weight: bold; font-size: 16px; }
+    .remote-badge { background: var(--border); font-size: 11px; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
+    .remote-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; line-height: 1.4; min-height: 36px; }
+    .remote-footer { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <div class="top">
+    <p>🛡️ NoCreepy Settings</p>
+  </div>
+
+  <div class="container">
+    
+    <div class="card stats-card">
+      <div class="stats-number" id="statsCount">0</div>
+      <div class="stats-label">Inappropriate Messages Censored since install</div>
+    </div>
+
+    <div class="toggles">
+      <div class="card toggle-card">
+        <div>
+          <strong>Message Filter</strong>
+          <span>Censors bad words in live chat</span>
+        </div>
+        <input type="checkbox" id="toggleMessages">
+      </div>
+      <div class="card toggle-card">
+        <div>
+          <strong>Server Filter</strong>
+          <span>Blocks entry to dangerous server IDs</span>
+        </div>
+        <input type="checkbox" id="toggleServers">
+      </div>
+    </div>
+
+    <div class="lists-grid">
+      <div class="card list-card">
+        <h2>Manual Blocked Words</h2>
+        <div class="input-group">
+          <input type="text" id="wordInput" placeholder="Add a custom word/regex...">
+          <button id="addWordBtn">Add</button>
+        </div>
+        <ul id="wordList"></ul>
+      </div>
+
+      <div class="card list-card">
+        <h2>Manual Blocked Servers</h2>
+        <div class="input-group">
+          <input type="text" id="serverInput" placeholder="Add a Server ID...">
+          <button id="addServerBtn">Add</button>
+        </div>
+        <ul id="serverList"></ul>
+      </div>
+    </div>
+
+    <div class="card list-card">
+      <div class="remote-header">
+        <h2>Remote Subscriptions</h2>
+        <button id="resyncAllBtn" class="btn-secondary">🔄 Resync All</button>
+      </div>
+      <div class="input-group">
+        <input type="text" id="remoteUrlInput" placeholder="Paste .txt URL (e.g. raw.githubusercontent.com/...)">
+        <button id="addRemoteBtn">Subscribe</button>
+      </div>
+      <div class="remote-grid" id="remoteListsContainer">
+        </div>
+    </div>
+
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

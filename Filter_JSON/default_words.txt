@@ -1,0 +1,8 @@
+Name="Default Blocks List" #title of the block list like most_thailand_creepy_messages
+Description="Under experiment" #Description of the block list
+blocks_type="text" # between text or server_id
+Author="blueskychan-dev"
+
+# Your content here.
+sure
+roblox
