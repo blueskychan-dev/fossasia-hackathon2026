@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=320">
+  <title>NoCreepy</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1a1a1a;
+      --muted: #888888;
+      --accent: #6c5ce7;
+      --card-bg: #f4f4f5;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #18181b;
+        --fg: #e4e4e7;
+        --muted: #71717a;
+        --accent: #a78bfa;
+        --card-bg: #27272a;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 300px;
+      min-height: 180px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .logo { font-size: 32px; margin-bottom: 8px; user-select: none; }
+    h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .badge {
+      display: inline-block;
+      background: var(--card-bg);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+    .version { margin-top: 20px; font-size: 11px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="logo">🛡️</div>
+  <h1>NoCreepy</h1>
+  <span class="badge">Coming soon</span>
+  <p class="version">v0.1.0</p>
+</body>
+</html>
