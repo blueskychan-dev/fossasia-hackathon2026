@@ -6,3 +6,4 @@ Author="blueskychan-dev"
 # Your content here.
 sure
 roblox
+(?i)f+[\W_]*[u\*v4]+[\W_]*c+[\W_]*k+|s+[\W_]*[e3]+[\W_]*x+
