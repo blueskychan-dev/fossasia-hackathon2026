@@ -6,10 +6,7 @@
     font-style: normal;
 }
 
-* {
-    font-family: "Stack Sans Headline", monospace !important;
-}
-
+/* theme variables, dark and light */
 :root {
     color-scheme: light dark;
     --bg: #e7f9ffFF;
@@ -29,17 +26,21 @@
     }
 }
 
+/* layout reset and changing the font globally */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Stack Sans Headline", monospace !important;
 }
 
+/* used if text masking effects are added later */
 .text-node {
     background-clip: text !important;
     -webkit-background-clip: text !important;
 }
 
+/* body */
 body {
     width: 300px;
     min-height: 400px;
@@ -48,6 +49,7 @@ body {
     color: var(--fg);
 }
 
+/* top header */
 .top {
     width: 100%;
     height: 40px;
@@ -69,13 +71,32 @@ body {
     display: flex;
 }
 
+/* toggle icon */
 .toggle img {
     margin-top: 20px;
     margin-bottom: 20px;
+    cursor: pointer;
+
+    /* animation base */
+    transition:
+        transform 0.18s ease,
+        filter 0.18s ease,
+        opacity 0.18s ease;
 }
 
-/* Statistics Style */
+/* hover animation */
+.toggle img:hover {
+    transform: scale(1.08);
+    filter: brightness(1.1);
+}
 
+/* click animation */
+.toggle img:active {
+    transform: scale(0.92);
+    filter: brightness(0.9);
+}
+
+/* divider */
 hr {
     /* separate between statistics and toggle area */
     border: none;
@@ -84,6 +105,7 @@ hr {
     margin: 0;
 }
 
+/* statistics section */
 .statistics {
     width: 100%;
     padding: 12px;
@@ -99,12 +121,22 @@ hr {
     color: #1a526580;
 }
 
+/* information rows */
 .info {
     display: flex;
     gap: 10px;
     margin-bottom: 12px;
+
+    /* smooth hover animation */
+    transition: transform 0.15s ease;
 }
 
+/* slight lift when hovering rows */
+.info:hover {
+    transform: translateX(2px);
+}
+
+/* text container */
 .text {
     display: flex;
     flex-direction: column;
@@ -115,8 +147,7 @@ hr {
     color: #1a5265;
 }
 
-/* Footer sTyle */
-
+/* Footer */
 .footer {
     width: 100%;
     height: 40px;
@@ -128,3 +159,9 @@ hr {
     padding-right: 10px;
     color: #1a526580;
 }
+
+.footer img {
+    cursor: pointer;
+}
+
+/* nya :3 */

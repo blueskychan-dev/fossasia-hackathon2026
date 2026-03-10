@@ -2,51 +2,79 @@
 <html lang="en">
 
 <head>
+  <!-- basic page metadata -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=320">
   <title>NoCreepy</title>
+
+  <!-- loading stylesheet and button javascript file -->
   <link rel="stylesheet" href="./assets/main.css">
+  <script src="./assets/scripts/button.js"></script>
 </head>
 
 <body>
+  <!-- main application container -->
   <div class="app">
+    <!-- top header -->
     <div class="top">
       <p>NoCreepy</p>
     </div>
+
+    <!-- toggle button -->
+    <!-- controls if filter should be enabled or not -->
     <div class="toggle">
-      <img src="assets/icons/toggled.svg" alt="Toggled">
+      <img id="toggleButton" src="assets/icons/toggled.svg" alt="Toggle content filter">
     </div>
+
+    <!-- statistics and settings overview -->
     <div class="statistics">
+      <!-- divider between toggle area and info -->
       <hr>
       <p class="subtitle" style="margin-top:8px;margin-bottom:8px">Settings and statistics</p>
+      
+      <!-- filter preset information -->
       <div class="info">
-        <img src="assets/icons/filter.svg" alt="Filter">
+        <img src="assets/icons/filter.svg" alt="Filter preset icon">
+
         <div class="text">
           <span class="paragraph">Filter preset: Profanity</span>
           <span class="subtitle">320,727 words are filtered</a>
         </div>
+
       </div>
+
+      <!-- current page filter statistics -->
       <div class="info">
-        <img src="assets/icons/blocked.svg" alt="Blocked">
+        <img src="assets/icons/blocked.svg" alt="Blocked words icon">
+
         <div class="text">
           <span class="paragraph">Filtered on this page: 200</span>
           <span class="subtitle">1,337 filtered since install</span>
         </div>
+
       </div>
       <div class="info">
-        <img src="assets/icons/chat.svg" alt="Chat">
+        <!-- current filter scope -->
+        <img src="assets/icons/chat.svg" alt="Chat filtering mode icon">
+
         <div class="text">
           <span class="paragraph">Current filter mode</span>
           <span class="subtitle">Server and Direct message</span>
         </div>
+
       </div>
     </div>
+
+    <!-- footer area -->
+    <!-- contains quick actions, e.g. github and settings -->
     <div class="footer">
+      <!-- tech tips :) -->
       <span>Add filters and server IDs in settings.</span>
-      <!-- github svg -->
-      <img src="assets/icons/github.svg" alt="GitHub">
-      <!-- settings svg -->
-      <img src="assets/icons/settings.svg" alt="settings">
+
+      <!-- github button -->
+      <img id="githubButton" src="assets/icons/github.svg" alt="Open github repository">
+      <!-- settings button -->
+      <img id="settingsButton" src="assets/icons/settings.svg" alt="Open extension settings">
     </div>
   </div>
 </body>
