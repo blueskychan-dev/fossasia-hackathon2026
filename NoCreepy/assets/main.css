@@ -1,0 +1,130 @@
+/* Font configuration */
+@font-face {
+    font-family: "Stack Sans Headline";
+    src: url("fonts/StackSansHeadline.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: "Stack Sans Headline", monospace !important;
+}
+
+:root {
+    color-scheme: light dark;
+    --bg: #e7f9ffFF;
+    --fg: #1a1a1a;
+    --muted: #888888;
+    --accent: #6c5ce7;
+    --card-bg: #f4f4f5;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #18181b;
+        --fg: #e4e4e7;
+        --muted: #71717a;
+        --accent: #a78bfa;
+        --card-bg: #27272a;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.text-node {
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+}
+
+body {
+    width: 300px;
+    min-height: 400px;
+    font-family: "Stack Sans Headline";
+    background: var(--bg);
+    color: var(--fg);
+}
+
+.top {
+    width: 100%;
+    height: 40px;
+    background: #c6edfb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top p {
+    font-size: 20px;
+    color: #1a5265;
+}
+
+/* Toggle area */
+.toggle {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.toggle img {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Statistics Style */
+
+hr {
+    /* separate between statistics and toggle area */
+    border: none;
+    border-top: 2px solid #2898bd33;
+    width: 100%;
+    margin: 0;
+}
+
+.statistics {
+    width: 100%;
+    padding: 12px;
+}
+
+.statistics .title {
+    font-weight: 600;
+    margin: 10px 0 12px;
+}
+
+.statistics .subtitle {
+    font-size: 10px;
+    color: #1a526580;
+}
+
+.info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
+
+.info .paragraph {
+    font-size: 16px;
+    color: #1a5265;
+}
+
+/* Footer sTyle */
+
+.footer {
+    width: 100%;
+    height: 40px;
+    background: #c6edfb;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-right: 10px;
+    color: #1a526580;
+}
